@@ -2,7 +2,18 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { Droplets, Leaf, ShieldCheck, Sprout } from "lucide-react";
+import {
+  Check,
+  Droplets,
+  Handshake,
+  Heart,
+  Leaf,
+  Recycle,
+  Salad,
+  ShieldCheck,
+  Sprout,
+  Waves,
+} from "lucide-react";
 import { gsap, useIsomorphicLayoutEffect, useReducedMotion } from "@/lib/motion";
 
 const features = [
@@ -11,12 +22,36 @@ const features = [
     Icon: Leaf,
   },
   {
+    title: "No Parabens & SLS",
+    Icon: ShieldCheck,
+  },
+  {
+    title: "Sulphates Free",
+    Icon: Waves,
+  },
+  {
     title: "No Harsh Chemicals",
     Icon: ShieldCheck,
   },
   {
     title: "Plant-Based",
     Icon: Sprout,
+  },
+  {
+    title: "No Cruelty",
+    Icon: Heart,
+  },
+  {
+    title: "Vegan",
+    Icon: Salad,
+  },
+  {
+    title: "Ethically Sourced",
+    Icon: Handshake,
+  },
+  {
+    title: "100% Recycled Plastic",
+    Icon: Recycle,
   },
   {
     title: "Liquid Products",
@@ -38,7 +73,7 @@ export function WhatSetsUsApart() {
           autoAlpha: 1,
           y: 0,
           duration: 1,
-          stagger: 0.12,
+          stagger: 0.06,
           ease: "power3.out",
           scrollTrigger: { trigger: root.current, start: "top 75%", once: true },
         },
@@ -66,8 +101,8 @@ export function WhatSetsUsApart() {
             What Sets Us Apart
           </h2>
           <p className="apart-reveal section-intro mt-6">
-            Natural ingredients. No harsh chemicals. Plant-based liquid products
-            made for everyday care.
+            Natural ingredients, plant-based care and no parabens or SLS — made
+            for everyday use.
           </p>
         </div>
 
@@ -90,16 +125,22 @@ export function WhatSetsUsApart() {
           </div>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4 md:gap-5">
+        <div className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-5">
           {features.map(({ title, Icon }) => (
             <article
               key={title}
-              className="apart-reveal flex flex-col items-center rounded-[26px] border border-forest/10 bg-white/45 px-4 py-8 text-center backdrop-blur-sm transition-all duration-700 ease-premium hover:-translate-y-1.5 hover:border-forest/20 hover:bg-white/75 hover:shadow-card sm:py-10"
+              className="apart-reveal flex h-full flex-col items-center justify-center rounded-[26px] border border-forest/10 bg-white/45 px-3 py-7 text-center backdrop-blur-sm transition-all duration-700 ease-premium hover:-translate-y-1.5 hover:border-forest/20 hover:bg-white/75 hover:shadow-card sm:px-4 sm:py-9"
             >
-              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-forest/15 bg-white/70 text-forest-soft">
+              <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-forest/15 bg-white/70 text-forest-soft">
                 <Icon className="h-6 w-6" strokeWidth={1.4} />
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-forest text-white shadow-[0_4px_10px_rgba(31,64,50,0.25)]"
+                >
+                  <Check className="h-3 w-3" strokeWidth={2.4} />
+                </span>
               </span>
-              <h3 className="mt-5 font-display text-lg leading-tight text-forest sm:text-xl">
+              <h3 className="mt-6 font-display text-sm leading-tight text-forest sm:text-base">
                 {title}
               </h3>
             </article>
