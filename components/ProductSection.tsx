@@ -110,6 +110,9 @@ export function ProductSection({
   useIsomorphicLayoutEffect(() => {
     if (reducedMotion || !root.current) return;
 
+    // Keep the bottle still on mobile — the parallax float is desktop-only.
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+
     const context = gsap.context(() => {
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -124,9 +127,9 @@ export function ProductSection({
         .fromTo(
           ".product-float",
           {
-            yPercent: 15,
-            scale: 0.9,
-            rotation: -5,
+            yPercent: isDesktop ? 15 : 0,
+            scale: isDesktop ? 0.9 : 1,
+            rotation: isDesktop ? -5 : 0,
             autoAlpha: 0,
           },
           {
@@ -138,11 +141,6 @@ export function ProductSection({
             ease: "power2.out",
           },
           0,
-        )
-        .to(
-          ".product-float",
-          { yPercent: -8, rotation: 1.5, duration: 1, ease: "none" },
-          1,
         )
         .fromTo(
           ".decor-orb",
@@ -188,7 +186,7 @@ export function ProductSection({
 
       <div className="container-wide relative z-10 grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 xl:gap-24">
         {/* Product stage */}
-        <div className="relative order-2 flex h-[380px] items-center justify-center sm:h-[500px] lg:order-1 lg:h-[640px] xl:h-[700px]">
+        <div className="relative order-1 flex h-[380px] items-center justify-center sm:h-[500px] lg:order-1 lg:h-[640px] xl:h-[700px]">
           <div
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 h-[70%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] blur-[70px]"
@@ -215,7 +213,7 @@ export function ProductSection({
         </div>
 
         {/* Editorial product detail */}
-        <div className="order-1 max-w-xl text-center lg:order-2 lg:mx-auto">
+        <div className="order-2 max-w-xl text-center lg:order-2 lg:mx-auto">
           <p className="reveal-item eyebrow flex items-center justify-center gap-4 lg:justify-start">
             <span className="font-sans text-[0.7rem] tracking-normal text-forest/70">
               {activeProduct.number}
