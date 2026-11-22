@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { ArrowUpRight, Minus, Plus } from "lucide-react";
 import { AddToInquiryButton } from "@/components/AddToInquiryButton";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
@@ -11,10 +11,12 @@ export function OrderControls({
   product,
   label = "Order on WhatsApp",
   onSizeChange,
+  children,
 }: {
   product: Product;
   label?: string;
   onSizeChange?: (size: string) => void;
+  children?: ReactNode;
 }) {
   const [size, setSize] = useState(product.sizes[0] ?? "");
   const [quantity, setQuantity] = useState(1);
@@ -81,6 +83,8 @@ export function OrderControls({
           </div>
         </div>
       </div>
+
+      {children}
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <a

@@ -184,9 +184,32 @@ export function ProductSection({
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_55%,rgba(255,255,255,0.72),transparent_62%)]"
       />
 
-      <div className="container-wide relative z-10 grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 xl:gap-24">
-        {/* Product stage */}
-        <div className="relative order-1 flex h-[380px] items-center justify-center sm:h-[500px] lg:order-1 lg:h-[640px] xl:h-[700px]">
+      <div className="container-wide relative z-10 grid w-full items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-x-16 lg:gap-y-8 xl:gap-x-24">
+        {/* Name + intro — first on mobile, top-right on desktop */}
+        <div className="max-w-xl text-center lg:col-start-2 lg:row-start-1 lg:mx-auto">
+          <p className="reveal-item eyebrow flex items-center justify-center gap-4 lg:justify-start">
+            <span className="font-sans text-[0.7rem] tracking-normal text-forest/70">
+              {activeProduct.number}
+            </span>
+            <span className="h-px w-8 bg-forest/30" />
+            {activeProduct.category}
+          </p>
+
+          <h2 className="reveal-item mt-6 font-display text-[clamp(2.9rem,6vw,5rem)] font-light leading-[0.98] tracking-[-0.02em] text-forest">
+            {activeProduct.name}
+          </h2>
+
+          <p className="reveal-item mt-4 font-display text-[clamp(1.5rem,2.6vw,2.1rem)] italic font-light text-forest-soft">
+            {activeProduct.tagline}
+          </p>
+
+          <p className="reveal-item mt-6 text-sm leading-[1.9] text-muted sm:text-[0.95rem]">
+            {activeProduct.description}
+          </p>
+        </div>
+
+        {/* Product stage — image sits between the intro and the options on mobile */}
+        <div className="relative flex h-[380px] items-center justify-center sm:h-[500px] lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:h-[640px] xl:h-[700px]">
           <div
             aria-hidden="true"
             className="absolute left-1/2 top-1/2 h-[70%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-[50%] blur-[70px]"
@@ -212,54 +235,10 @@ export function ProductSection({
           />
         </div>
 
-        {/* Editorial product detail */}
-        <div className="order-2 max-w-xl text-center lg:order-2 lg:mx-auto">
-          <p className="reveal-item eyebrow flex items-center justify-center gap-4 lg:justify-start">
-            <span className="font-sans text-[0.7rem] tracking-normal text-forest/70">
-              {activeProduct.number}
-            </span>
-            <span className="h-px w-8 bg-forest/30" />
-            {activeProduct.category}
-          </p>
-
-          <h2 className="reveal-item mt-6 font-display text-[clamp(2.9rem,6vw,5rem)] font-light leading-[0.98] tracking-[-0.02em] text-forest">
-            {activeProduct.name}
-          </h2>
-
-          <p className="reveal-item mt-4 font-display text-[clamp(1.5rem,2.6vw,2.1rem)] italic font-light text-forest-soft">
-            {activeProduct.tagline}
-          </p>
-
-          <p className="reveal-item mt-6 text-sm leading-[1.9] text-muted sm:text-[0.95rem]">
-            {activeProduct.description}
-          </p>
-
-          {showIngredients && (
-            <p className="reveal-item mt-8 font-display text-lg italic font-light text-forest">
-              Key Ingredients
-            </p>
-          )}
-          {detailItems.length > 0 && (
-            <div className="reveal-item mt-3 grid gap-3 text-left sm:grid-cols-2">
-              {detailItems.map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-forest/10 bg-white/40 px-4 py-3 backdrop-blur-sm"
-                >
-                  <Check
-                    className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forest-soft"
-                    strokeWidth={2}
-                  />
-                  <span className="text-[0.72rem] leading-relaxed text-ink/75">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
-
+        {/* Variant, sizes, ingredients and ordering */}
+        <div className="max-w-xl text-center lg:col-start-2 lg:row-start-2 lg:mx-auto">
           {activeProduct.fragrance && (
-            <p className="reveal-item mt-6 flex items-start justify-center gap-2 text-xs text-muted lg:justify-start">
+            <p className="reveal-item flex items-start justify-center gap-2 text-xs text-muted lg:justify-start">
               <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forest-soft" strokeWidth={1.7} />
               <span>
                 <span className="font-semibold text-forest/80">Variant:</span>{" "}
@@ -280,9 +259,40 @@ export function ProductSection({
             <OrderControls
               product={displayProduct}
               onSizeChange={setSelectedSize}
-            />
+            >
+              {(showIngredients || detailItems.length > 0) && (
+                <div className="mt-8 text-left">
+                  {showIngredients && (
+                    <p className="font-display text-lg italic font-light text-forest">
+                      Key Ingredients
+                    </p>
+                  )}
+                  {detailItems.length > 0 && (
+                    <div
+                      className={`grid gap-3 sm:grid-cols-2 ${
+                        showIngredients ? "mt-3" : ""
+                      }`}
+                    >
+                      {detailItems.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-start gap-3 rounded-2xl border border-forest/10 bg-white/40 px-4 py-3 backdrop-blur-sm"
+                        >
+                          <Check
+                            className="mt-0.5 h-3.5 w-3.5 shrink-0 text-forest-soft"
+                            strokeWidth={2}
+                          />
+                          <span className="text-[0.72rem] leading-relaxed text-ink/75">
+                            {item}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </OrderControls>
           </div>
-
         </div>
       </div>
     </section>
