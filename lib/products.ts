@@ -101,7 +101,6 @@ export const products: Product[] = [
       "RO Water",
       "Coconut-Derived Surfactants",
       "Plant-Based Cleaning Agents",
-      "Glycerin",
       "Premium Fragrance",
       "Permitted Food Colour",
       "Sodium Chloride (Salt)",
