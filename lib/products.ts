@@ -183,7 +183,7 @@ export const products: Product[] = [
     category: "Bathroom Care",
     tagline: "Toilet Cleaner",
     description:
-      "Cuts through grease and everyday food residue, leaving dishes clean and sparkling with a refreshing fragrance.",
+      "Helps remove everyday dirt and stains from toilet surfaces, leaving the bathroom clean and fresh.",
     benefits: [],
     ingredients: [
       "RO Water",
