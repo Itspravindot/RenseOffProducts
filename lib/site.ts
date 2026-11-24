@@ -39,6 +39,11 @@ export const brandInfo = {
     role: "Founder & CEO",
   },
   bulkNote: "",
+  madeBy: {
+    eyebrow: "Made by Renseoff",
+    title: "From formulation to finished product.",
+    body: "We manufacture our own cleaning products with a focus on consistent formulations, quality checks and careful packaging.",
+  },
 } as const;
 
 export const navLinks = [

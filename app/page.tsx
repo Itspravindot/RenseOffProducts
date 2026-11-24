@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { HowToOrder } from "@/components/HowToOrder";
 import { InquiryBasket } from "@/components/InquiryBasket";
+import { MadeByRenseoff } from "@/components/MadeByRenseoff";
 import { Navbar } from "@/components/Navbar";
 import { ProductSection } from "@/components/ProductSection";
 import { Reviews } from "@/components/Reviews";
@@ -24,6 +25,7 @@ export default function HomePage() {
           <ProductSection key={product.id} product={product} index={index} />
         ))}
         <Story />
+        <MadeByRenseoff />
         <Collection />
         <WhatSetsUsApart />
         <HowToOrder />
